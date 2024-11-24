@@ -1,0 +1,20 @@
+import cv2
+from crowd_monitor import output_frames  # Import the frames list
+
+# Define the output path
+output_path = r"E:\Mini PROJECT\bus_monitor\output data\output_video.avi"
+
+# Check if output_frames has been populated
+if output_frames:
+    height, width, _ = output_frames[0].shape
+    fourcc = cv2.VideoWriter_fourcc(*'XVID')
+    out = cv2.VideoWriter(output_path, fourcc, 20.0, (width, height))
+
+    for frame in output_frames:
+        out.write(frame)  # Write each frame to the video file
+        print("Writing frame to video...")  # Debug statement
+
+    out.release()  # Release the video writer
+    print(f"Video saved as {output_path}")
+else:
+    print("No frames to save.")
